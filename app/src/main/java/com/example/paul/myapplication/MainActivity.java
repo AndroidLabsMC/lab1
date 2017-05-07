@@ -103,14 +103,6 @@ ListView listView;
                 Intent intent=new Intent(this,SecondPage.class);
                 startActivity(intent);
                 return true;
-            case R.id.third:
-                Intent intent2=new Intent(this,ThirdPage.class);
-                startActivity(intent2);
-                return true;
-            case R.id.fourth:
-                Intent intent3=new Intent(this,FourthPage.class);
-                startActivity(intent3);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -135,10 +127,7 @@ ListView listView;
         AdapterView.AdapterContextMenuInfo info =
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
-            case R.id.fifth:
-                Intent intent = new Intent(this, FifthPage.class);
-                startActivity(intent);
-                return true;
+          
 
             default:
                 return super.onContextItemSelected(item);
