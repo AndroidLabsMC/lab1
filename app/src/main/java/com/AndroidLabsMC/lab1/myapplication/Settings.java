@@ -45,7 +45,7 @@ public class Settings extends AppCompatActivity {
                 editor.putString(Bamf, b);
 
 
-                editor.commit();
+                editor.apply();
                 Toast.makeText(Settings.this,"Thanks for the Bamf", Toast.LENGTH_LONG).show();
             }
         });
