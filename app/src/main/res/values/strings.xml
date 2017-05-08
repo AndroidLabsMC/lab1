@@ -1,9 +1,33 @@
 <resources>
+    <string name="url_list">/list</string>
+    <string name="host_list">list</string>
+    <string name="url_expandable_list">/expandable</string>
+    <string name="host_expandable_list">expandable</string>
+    <string name="expandable_list">Expandable</string>
+    <string name="back">Back</string>
+    <string name="refresh">Refresh</string>
+    <string name="url_settings">/settings</string>
+    <string name="host_settings">settings</string>
+    <string name="action_delete">Delete</string>
     <string name="app_name">MyApplication</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_second_page">SecondPage</string>
     <string name="button">Pop-up</string>
     <string name="title_activity_third_page">ThirdPage</string>
     <string name="title_activity_fourth_page">FourthPage</string>
-    <string name="title_activity_fifth_page">FifthPage</string>
+
+
+    <string-array name="list_of_stuff">
+        <item>Ball</item>
+        <item>Tupac</item>
+        <item>Cows</item>
+        <item>Orange</item>
+        <item>Ship</item>
+        <item>Easter</item>
+        <item>Penguin</item>
+        <item>Holes</item>
+        <item>Lichi</item>
+        <item>Problem</item>
+    </string-array>
+
 </resources>
