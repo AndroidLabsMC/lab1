@@ -1,49 +1,62 @@
 package com.AndroidLabsMC.lab1.myapplication;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class Settings extends AppCompatActivity {
-    ArrayList things;
-    android.widget.ListView listView;
+    private EditText ed1;
+    private Button b1;
+
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String Bamf = "Bamf";
+
+
+    SharedPreferences sharedpreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        things = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.list_of_stuff)));
+        setContentView(R.layout.settings);
+
+        ed1=(EditText)findViewById(R.id.editText);
 
 
-        listView = (android.widget.ListView) findViewById(R.id.list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, things);
-        // Assign adapter to ExpandableListViewActivity
-        listView.setAdapter(adapter);
-        registerForContextMenu(listView);
 
+        b1=(Button)findViewById(R.id.save_button);
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String b  = ed1.getText().toString();
+
+
+                SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
+                editor.putString(Bamf, b);
+
+
+                editor.commit();
+                Toast.makeText(Settings.this,"Thanks for the Bamf", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
         return true;
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -52,48 +65,16 @@ public class Settings extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        switch (item.getItemId()) {
+        switch (id) {
             case R.id.action_back:
-                Intent intent=new Intent(this,ExpandableListViewActivity.class);
-                startActivity(intent);
-                return true;
+                finish();
+                break;
             default:
-                return super.onOptionsItemSelected(item);
-        }
-
-
-    }
-
-
-
-    @Override
-    public void onCreateContextMenu(ContextMenu
-                                            menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v,
-                menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_settings,
-                menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info =
-                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-          
-
-            default:
-                return super.onContextItemSelected(item);
 
 
         }
-    }
+        return super.onOptionsItemSelected(item);
 
+    }
 
 }

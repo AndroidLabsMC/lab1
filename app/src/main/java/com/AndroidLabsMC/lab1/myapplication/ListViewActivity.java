@@ -1,6 +1,7 @@
 package com.AndroidLabsMC.lab1.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,8 @@ public class ListViewActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ArrayList things;
     private ListView listView;
+    private String MyPREFERENCES = "MyPrefs" ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,10 +104,12 @@ public class ListViewActivity extends AppCompatActivity {
 
                 // ListView Clicked item value
                 String  itemValue    = (String) listView.getItemAtPosition(position);
+                SharedPreferences shared = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+                String bamf = (shared.getString("Bamf", ""));
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Long press the "+ itemValue+" for context menu", Toast.LENGTH_LONG)
+                        bamf + "! (Change this in the settings menu -- Bamf parameter)", Toast.LENGTH_LONG)
                         .show();
 
             }
@@ -150,7 +155,7 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
