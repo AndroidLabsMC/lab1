@@ -1,11 +1,8 @@
-package com.example.paul.myapplication;
+package com.AndroidLabsMC.lab1.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -14,40 +11,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-ListView listView;
-    Button button1;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class ListViewActivity extends AppCompatActivity {
+    ArrayList things;
+    android.widget.ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        things = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.list_of_stuff)));
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        String[] values = new String[] { "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-        };
-        listView = (ListView) findViewById(R.id.list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        // Assign adapter to ListView
+        listView = (android.widget.ListView) findViewById(R.id.list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, things);
+        // Assign adapter to ExpandableListViewActivity
         listView.setAdapter(adapter);
         registerForContextMenu(listView);
 
@@ -76,7 +59,7 @@ ListView listView;
 
         switch (item.getItemId()) {
             case R.id.second:
-                Intent intent=new Intent(this,SecondPage.class);
+                Intent intent=new Intent(this,ExpandableListViewActivity.class);
                 startActivity(intent);
                 return true;
             default:

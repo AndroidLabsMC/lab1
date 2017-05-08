@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.paul.myapplication.MainActivity">
+    tools:context="com.AndroidLabsMC.lab1.myapplication.ListViewActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
