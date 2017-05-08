@@ -13,6 +13,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_second_page">SecondPage</string>
     <string name="button">Pop-up</string>
+    <string name="bamf">Bamf</string>
     <string name="title_activity_third_page">ThirdPage</string>
     <string name="title_activity_fourth_page">FourthPage</string>
 
