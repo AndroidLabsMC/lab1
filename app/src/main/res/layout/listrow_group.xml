@@ -11,5 +11,5 @@
     android:paddingTop="8dp"
     android:text="Test"
     android:textSize="14sp"
-    android:textAlignment="textEnd"
+    android:textAlignment="textStart"
     android:textStyle="bold" />
