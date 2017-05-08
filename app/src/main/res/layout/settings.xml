@@ -8,6 +8,6 @@
     tools:context="com.AndroidLabsMC.lab1.myapplication.ListViewActivity">
 
 
-    <include layout="@layout/content_expandable" />
+    <include layout="@layout/content_settings" />
 
 </android.support.design.widget.CoordinatorLayout>
