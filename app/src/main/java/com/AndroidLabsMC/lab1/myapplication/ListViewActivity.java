@@ -4,44 +4,115 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ListViewActivity extends AppCompatActivity {
-    ArrayList things;
-    android.widget.ListView listView;
+    private ArrayList<String> toDelete;
+    private ArrayAdapter<String> adapter;
+    private ArrayList things;
+    private ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        toDelete = new ArrayList<>();
         things = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.list_of_stuff)));
-
-
-        listView = (android.widget.ListView) findViewById(R.id.list);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, things);
-        // Assign adapter to ExpandableListViewActivity
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, things);
+        listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
-        registerForContextMenu(listView);
+
+
+
+
+
+
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listView.setMultiChoiceModeListener(new  AbsListView.MultiChoiceModeListener() {
+
+
+
+
+            @Override
+            public void onItemCheckedStateChanged(android.view.ActionMode mode, int position, long id, boolean checked) {
+                if (checked) {
+                    toDelete.add(adapter.getItem(position));
+                } else {
+                    toDelete.remove(adapter.getItem(position));
+                }
+            }
+
+            @Override
+            public boolean onCreateActionMode(android.view.ActionMode mode, Menu menu) {
+                MenuInflater menuInflater = getMenuInflater();
+                menuInflater.inflate(R.menu.menu_context, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(android.view.ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(android.view.ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_delete:
+                        for (String item2 : toDelete) {
+                            things.remove(item2);
+                        }
+                        mode.finish();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+
+
+
+            @Override
+            public void onDestroyActionMode(android.view.ActionMode mode) {
+                toDelete.clear();
+
+            }
+
+
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+
+                // ListView Clicked item value
+                String  itemValue    = (String) listView.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Long press the "+ itemValue+" for context menu", Toast.LENGTH_LONG)
+                        .show();
+
+            }
+        });
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
 
 
 
@@ -52,48 +123,42 @@ public class ListViewActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        switch (id) {
+            case R.id.action_refresh:
+                Toast.makeText(this, "Refreshing...", Toast.LENGTH_SHORT).show();
+                things.clear();
+                things.addAll(Arrays.asList(getResources().getStringArray(R.array.list_of_stuff)));
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.action_expandable:
+                startActivity(new Intent(this, ExpandableListViewActivity.class));
 
-        switch (item.getItemId()) {
-            case R.id.second:
-                Intent intent=new Intent(this,ExpandableListViewActivity.class);
-                startActivity(intent);
-                return true;
+                break;
+            case R.id.action_settings:
+                startActivity(new Intent(this, Settings.class));
+                break;
             default:
-                return super.onOptionsItemSelected(item);
-        }
 
+
+        }
+        return super.onOptionsItemSelected(item);
 
     }
 
 
 
     @Override
-    public void onCreateContextMenu(ContextMenu
-                                            menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v,
-                menuInfo);
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context,
-                menu);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info =
-                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-          
-
-            default:
-                return super.onContextItemSelected(item);
 
 
-        }
-    }
+
+
+
 
 
 }

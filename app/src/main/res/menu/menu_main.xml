@@ -2,18 +2,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.AndroidLabsMC.lab1.myapplication.ListViewActivity">
-    <item android:title="Second Page"
-        android:id="@+id/second" />
+
+
     <item
-    android:id="@+id/action_settings"
-    android:orderInCategory="100"
-    android:title="@string/action_settings"
-    app:showAsAction="never" />
+        android:id="@+id/action_expandable"
+        android:orderInCategory="99"
+
+        android:title="@string/expandable_list"
+        app:showAsAction="never"
+       />
+
+
     <item
-        android:title="Third Page"
-        android:id="@+id/third" />
+        android:id="@+id/action_refresh"
+        android:orderInCategory="98"
+        android:title="@string/refresh"
+        app:showAsAction="never" />
+
+
     <item
-        android:title="Fourth Page"
-        android:id="@+id/fourth" />
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 
 </menu>

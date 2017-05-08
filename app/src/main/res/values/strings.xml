@@ -4,10 +4,11 @@
     <string name="url_expandable_list">/expandable</string>
     <string name="host_expandable_list">expandable</string>
     <string name="expandable_list">Expandable</string>
-
+    <string name="back">Back</string>
+    <string name="refresh">Refresh</string>
     <string name="url_settings">/settings</string>
     <string name="host_settings">settings</string>
-
+    <string name="action_delete">Delete</string>
     <string name="app_name">MyApplication</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_second_page">SecondPage</string>

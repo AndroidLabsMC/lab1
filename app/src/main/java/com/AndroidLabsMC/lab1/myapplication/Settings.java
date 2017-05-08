@@ -21,7 +21,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         things = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.list_of_stuff)));
@@ -58,7 +58,7 @@ public class Settings extends AppCompatActivity {
         }
 
         switch (item.getItemId()) {
-            case R.id.second:
+            case R.id.action_back:
                 Intent intent=new Intent(this,ExpandableListViewActivity.class);
                 startActivity(intent);
                 return true;
@@ -77,7 +77,7 @@ public class Settings extends AppCompatActivity {
         super.onCreateContextMenu(menu, v,
                 menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.context,
+        inflater.inflate(R.menu.menu_settings,
                 menu);
     }
 
